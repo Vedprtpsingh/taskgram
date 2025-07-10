@@ -9,5 +9,4 @@ class TaskgramApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
