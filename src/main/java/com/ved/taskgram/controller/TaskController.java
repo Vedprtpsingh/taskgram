@@ -2,6 +2,7 @@ package com.ved.taskgram.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TaskController {
     private TaskService taskService;
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/tasks")
     public String getAllTasks(Model model){
         List<TaskDto>tasks=taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
         return "tasks/taskList";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/tasks")
     public String SaveTask(@ModelAttribute("task") TaskDto taskDto,Model model){
         //save logic
@@ -36,6 +39,7 @@ public class TaskController {
         model.addAttribute("task", taskDto);
         return "tasks/createTask";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/tasks/delete/{id}")
     public String deleteTask(@PathVariable("id") Long id){
         taskService.deleteTask(id);
@@ -47,6 +51,7 @@ public class TaskController {
         model.addAttribute("task", taskDto);
         return "tasks/editTask";
     }
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/tasks/{id}")
     public String updateTask(@PathVariable("id") Long id,@ModelAttribute("task") TaskDto taskDto){
         taskDto.setId(id);

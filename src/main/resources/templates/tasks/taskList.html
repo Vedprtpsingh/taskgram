@@ -6,7 +6,7 @@
     <title>TaskGram App: Task List </title>
 </head>
 <body>
-    <div th:replace="common/header :: header"></div>
+    <div th:replace="~{common/header :: header}"></div>
         <div class="container">
             <div>Task List</div>
             <div class="row">
@@ -24,9 +24,15 @@
                     </div>
                 </div>
                 <div>
-
                     <div th:if="${param.updated}">
                         <strong> success!</strong> Task has been updated successfully.
+                        <button type="button" aria-label="Close"></button>
+                    </div>
+                </div>
+
+                <div>
+                    <div th:if="${param.delete}">
+                        <strong> success!</strong> Task has been deleted successfully.
                         <button type="button" aria-label="Close"></button>
                     </div>
                 </div>
