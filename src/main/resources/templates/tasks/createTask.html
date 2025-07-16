@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskGram App </title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TaskGram App : Create Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <body>
     <div th:replace="~{common/header :: header}"></div>
-        <div class="container">
-            <div class="row">
-                <h2 class="text-center">Create Your Task</h2>
-            </div>
-            <div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4">Create Your Task</h2>
                 <form th:action="@{/tasks}" method="POST" role="form" th:object="${task}">
-                    <div>
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required th:field="*{name}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" id="name" name="name" required th:field="*{name}" class="form-control" />
                     </div>
-                    <div>
-                        <label for="description">Description:</label>
-                        <textarea type="text" id="description" name="description" required th:field="*{description}" rows="3"></textarea>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea id="description" name="description" required th:field="*{description}" rows="3" class="form-control"></textarea>
                     </div>
-                    <div>
-                        <label for="startDate">Start Date:</label>
-                        <input type="date" id="startDate" name="startDate" required th:field="*{startDate}">
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date:</label>
+                        <input type="date" id="startDate" name="startDate" required th:field="*{startDate}" class="form-control" />
                     </div>
-                    <div>
-                        <label for="endDate">End Date:</label>
-                        <input type="date" id="endDate" name="endDate" required th:field="*{endDate}">
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date:</label>
+                        <input type="date" id="endDate" name="endDate" required th:field="*{endDate}" class="form-control" />
                     </div>
-                    <div>
-                        <label for="priority">Priority:</label>
-                        <select id="priority" name="priority" required th:field="*{priority}">
+                    <div class="mb-3">
+                        <label for="priority" class="form-label">Priority:</label>
+                        <select id="priority" name="priority" required th:field="*{priority}" class="form-select">
                             <option value="HIGH">HIGH</option>
                             <option value="MEDIUM">MEDIUM</option>
                             <option value="LOW">LOW</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="status">Status:</label>
-                        <select type="text" id="status" name="status" required th:field="*{status}">
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status:</label>
+                        <select id="status" name="status" required th:field="*{status}" class="form-select">
                             <option value="TODO">TODO</option>
                             <option value="PENDING">PENDING</option>
                             <option value="COMPLETED">COMPLETED</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create Task</button>
+                    <button type="submit" class="btn btn-primary w-100">Create Task</button>
                 </form>
             </div>
         </div>
     </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
