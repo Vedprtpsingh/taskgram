@@ -1,38 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TaskGram App : Register</title>
-</head>
-<body>
+  </head>
+
+  <body>
     <div th:replace="~{common/header :: header}"></div>
     <div class="container">
-        <div class="row">
-            <h2 class="text-center">Register Your Account With TaskGram</h2>
-        </div>
-        <div>
-            <form th:action="@{/register/save}" method="POST" role="form" th:object="${user}">
-                <div>
-                    <label >First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required th:field="*{firstName}" />
-                </div>
-                <div>
-                    <label >Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" required th:field="*{lastName}" />
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required th:field="*{email}" />
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required th:field="*{password}" />
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-                <span>Already have an account? <a th:href="@{/login}">Login here</a>!</span>
-            </form>
-        </div>
+      <div class="row">
+        <h2 class="text-center">Register Your Account With TaskGram</h2>
+      </div>
+      <div th:if="${param.success}" class="alert alert-success">
+        <p>You Have Successfuly Register At The TaskGram</p>
+      </div>
+      <div>
+        <form
+          th:action="@{/register/save}"
+          method="POST"
+          role="form"
+          th:object="${user}"
+        >
+          <div>
+            <label>First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              th:field="*{firstName}"
+            />
+            <p
+              th:error="*{firstName}"
+              th:if="${#fields.hasErrors('firstName')}"
+            ></p>
+          </div>
+          <div>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              th:field="*{lastName}"
+            />
+            <p th:error="*{lastName}"th:if="${#fields.hasErrors('lastName')}"></p>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" 
+            id="email" 
+            name="email" 
+            th:field="*{email}" 
+            />
+            <p th:error="*{email}"th:if="${#fields.hasErrors('email')}"></p>
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input
+            type="password"
+            id="password"
+            name="password"
+            th:field="*{password}"
+            />
+            <p th:error="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+          <span
+            >Already have an account?
+            <a th:href="@{/login}">Login here</a>!</span
+          >
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>
