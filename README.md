@@ -1,6 +1,6 @@
 # TaskGram - Task Manager Application
 
-TaskGram is a web-based task management application built with Java Spring Boot and Thymeleaf. It allows users to efficiently manage their daily tasks with features such as user registration, login, and CRUD operations on tasks.
+TaskGram is a Java Spring Boot web app for managing tasks with user registration, login, and CRUD operations.
 
 ## Features
 

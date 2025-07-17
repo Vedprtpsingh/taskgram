@@ -12,9 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import lombok.AllArgsConstructor;
-
 @Configuration
 @EnableMethodSecurity
 @AllArgsConstructor
@@ -45,6 +43,14 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .permitAll()
         );
+        http
+    .logout(logout -> logout
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login?logout")
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
+    );
+
     return http.build();
 }
     @Autowired

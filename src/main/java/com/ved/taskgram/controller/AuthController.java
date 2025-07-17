@@ -1,6 +1,10 @@
 package com.ved.taskgram.controller;
 import org.springframework.validation.BindingResult;
 import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,8 @@ import com.ved.taskgram.dto.UserDto;
 import com.ved.taskgram.entity.User;
 import com.ved.taskgram.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 @Controller
 public class AuthController {
@@ -32,7 +38,7 @@ public class AuthController {
     }
     @PostMapping("/authenticate")
     public String authenticateUser(){
-        return "";
+        return "index";
     }
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result,Model model){
@@ -56,4 +62,13 @@ public class AuthController {
         model.addAttribute("users", users);
         return "users/user_list";
     }
+    @GetMapping("/logout")
+public String logout(HttpServletRequest request, HttpServletResponse response) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null) {
+        new SecurityContextLogoutHandler().logout(request, response, auth);
+    }
+    return "redirect:/login?logout";
+}
+
 }
